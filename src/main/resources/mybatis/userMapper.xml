@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="UserMapper">
+    <sql id="Base_read" >
+        title, createdtime,changetime,context
+    </sql>
+    <sql id="Base_values" >
+        #{title},#{createdtime},#{changetime},#{context}
+    </sql>
+
+    <select id="getpermission" parameterType="String" resultType="User">
+        select user.*,userpermission.* from user,userpermission where user.userroles=userpermission.userroles and user.username=#{username};
+    </select>
+
+    <select id="getusername" resultType="User">
+        SELECT *FROM user WHERE username = #{username}
+    </select>
+
+    <select id="getallcount" resultType="int">
+        SELECT count(id) FROM blogcontext
+    </select>
+
+    <select id="justsearch" parameterType="String" resultType="blogcontext">
+      SELECT *FROM blogcontext WHERE context regexp ${regexp}
+    </select>
+
+    <insert id="insertinto" parameterType="blogcontext">
+        INSERT INTO blogcontext(<include refid="Base_read" />) VALUES (<include refid="Base_values" />)
+    </insert>
+
+    <select id="update" parameterType="blogcontext">
+      update blogcontext set title=#{title},createdtime=#{createdtime},changetime=#{changetime},context=#{context} where id=#{id}
+    </select>
+
+    <select id="getone" parameterType="int" resultType="blogcontext">
+        SELECT *FROM blogcontext WHERE id=#{id}
+    </select>
+
+    <select id="getall" resultType="blogcontext">
+        SELECT *FROM blogcontext
+    </select>
+
+    <delete id="delid" parameterType="int">
+        DELETE FROM blogcontext WHERE id=#{id}
+    </delete>
+
+</mapper>

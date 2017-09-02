@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="bootstrap.css"/>
+    <link rel="stylesheet" href="bootstrap-theme.css"/>
+    <script src="bootstrap.js"></script>
+    <script src="jquery.js"></script>
+
+    <link rel="stylesheet" href="/bootstrap.css"/>
+    <link rel="stylesheet" href="/bootstrap-theme.css"/>
+    <script src="/bootstrap.js"></script>
+    <script src="/jquery.js"></script>
+</head>
+<body>
+
+
+<div class="container">
+    <h4 th:text="${message}"></h4><br/>
+    <a href="/database/wirtedatahtml">
+        <button type="button" class="btn btn-default btn-primary">写入数据到数据库</button>
+    </a>
+    <a href="/database/del">
+        <button type="button" class="btn btn-default btn-primary">批量删除所有数据</button>
+    </a>
+    <a href="/database/wirtedata">
+        <button type="button" class="btn btn-default btn-primary">写入一百条数据到数据库</button>
+    </a>
+    <a href="/">
+        <button type="button" class="btn btn-default btn-primary">返回</button>
+    </a>
+    <div class="row">
+        <div class="col-xs-6">
+            <a th:href="${lastpage}">
+                <button type="button" class="btn btn-default btn-block btn-primary">上一页</button>
+            </a>
+        </div>
+        <div class="col-xs-6">
+            <a th:href="${nextpage}">
+                <button type="button" class="btn btn-default btn-block btn-primary">下一页</button>
+            </a>
+        </div>
+    </div>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>标题</th>
+            <th>内容</th>
+        </tr>
+        </thead>
+        <tbody>
+        <span th:each="list:${context}">
+                        <tr>
+                        <td th:text="${list.id}"></td>
+                        <td th:text="${list.title}"></td>
+                        <td th:text="${#strings.abbreviate(list.context,100)}"></td>
+                            <td><a th:href="${'/database/edit/'+list.id}"><button type="button"
+                                                                         class="btn btn-warning btn-sm ">编辑</button></a>
+                            <a th:href="${'/database/delid/'+list.id}"><button type="button"
+                                                                      class="btn btn-warning btn-sm">删除</button></a></td>
+                        </tr>
+                    </span>
+
+        </tbody>
+    </table>
+
+</div>
+
+
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="bootstrap.css"/>
+    <link rel="stylesheet" href="bootstrap-theme.css"/>
+    <script src="bootstrap.js"></script>
+    <script src="jquery.js"></script>
+
+    <link rel="stylesheet" href="/bootstrap.css"/>
+    <link rel="stylesheet" href="/bootstrap-theme.css"/>
+    <script src="/bootstrap.js"></script>
+    <script src="/jquery.js"></script>
+    <link rel="stylesheet" href="/style.css">
+
+</head>
+<body>
+
+<div th:include="navbar :: navbarc"></div>
+
+<div class="row">
+
+</div>
+
+<div class="container">
+    <h4 th:text="${message}"></h4><br/>
+
+    <div id="content">
+        <div class="row clearfix">
+            <div class="col-md-10 column">
+                <form class="navbar-form" action="/search" method="post">
+                    <input type="text" class="form-control" name="search" placeholder="搜索">
+                </form>
+
+                <span th:each="list:${context}">
+		<div class="bs-docs-example">
+            <a th:href="${'/blogcontext/'+list.id}">
+                <h4 th:utext="${list.title}"></h4>
+            </a>
+
+            <h5 th:utext="${#strings.abbreviate(list.context,100)}"> </h5>
+
+            <div style="text-align: left;">
+                <h6 th:if="${list.createdtime != null}">
+                    发表时间:<span th:text="${list.createdtime}"></span>
+                </h6>
+
+                <h6 th:if="${list.changetime != null}">
+                    更新时间:<span th:text="${list.changetime}"></span>
+                </h6>
+
+			</div>
+
+			<div style="text-align: right;">
+                 <a th:href="${'/edit/'+list.id}">编辑</a>
+                            <a th:href="${'/delid/'+list.id}">删除</a>
+			</div>
+		  </div>
+	</span>
+            </div>
+            <div class="col-md-1 column">
+                <a href="/vote">投票系统</a>
+                <a href="/aboutsearch">搜索工具</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

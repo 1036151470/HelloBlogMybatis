@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="bootstrap.css"/>
+    <link rel="stylesheet" href="bootstrap-theme.css"/>
+    <script src="bootstrap.js"></script>
+
+    <link rel="stylesheet" href="/bootstrap.css"/>
+    <link rel="stylesheet" href="/bootstrap-theme.css"/>
+    <script src="/bootstrap.js"></script>
+    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" type="text/css" href="../dist/css/wangEditor.min.css"/>
+    <link rel="stylesheet" href="/style.css">
+
+</head>
+<body>
+
+<div th:include="navbar :: navbarc"></div>
+
+
+<div class="container">
+    <div class="row clearfix">
+        <form action="/notepad" method="get">
+            <input class="search-text" name="s" type="text"/><br/>
+            <button type="submit" class="btn btn-default btn-primary">打开</button>
+        </form>
+        <div class="form-group">
+            <form action="/notepad2" method="post">
+                <button type="submit" class="btn btn-default btn-primary">保存</button>
+
+
+                <textarea id="content" rows="20" cols="120" th:text="${con} ? ${con} :''" name="con"></textarea>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>
